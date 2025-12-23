@@ -7,7 +7,7 @@ def run_pv_trainer():
     st.write("Practica los verbos oficiales de Cambridge.")
 
     # URL Raw de tu nuevo repo (sustituye TU_USUARIO)
-    DATA_URL = "https://raw.githubusercontent.com/TU_USUARIO/TeoriaFCE/main/phrasal_verbs.csv"
+    DATA_URL = "https://raw.githubusercontent.com/henrypamo-dotcom/TeoriaFCE/refs/heads/main/phrasal_verbs.csv"
     
     try:
         df = pd.read_csv(DATA_URL)
