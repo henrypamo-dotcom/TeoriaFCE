@@ -3,17 +3,34 @@ import pandas as pd
 import nltk
 from nltk.stem import WordNetLemmatizer
 import re
+import os
 
 # --- 1. CONFIGURACIÓN DE INTELIGENCIA (NLTK) ---
 # Usamos @st.cache_resource para que no se descargue cada vez que tocas un botón
 @st.cache_resource
 def setup_nltk():
-    try:
-        nltk.data.find('corpora/wordnet')
-        nltk.data.find('corpora/omw-1.4')
-    except LookupError:
-        nltk.download('wordnet')
-        nltk.download('omw-1.4')
+    """
+    Configura NLTK descargando los datos en una carpeta local del proyecto
+    para evitar errores de 'File not found' en Streamlit Cloud.
+    """
+    # Definimos una ruta local segura dentro de tu proyecto
+    root_dir = os.path.dirname(os.path.abspath(__file__))
+    nltk_data_path = os.path.join(root_dir, 'nltk_data')
+    
+    # Si la carpeta no existe, la creamos
+    if not os.path.exists(nltk_data_path):
+        os.makedirs(nltk_data_path)
+    
+    # Añadimos esta ruta a la lista de sitios donde busca NLTK
+    nltk.data.path.append(nltk_data_path)
+
+    # Descargamos los paquetes necesarios en esa ruta específica
+    for resource in ['wordnet', 'omw-1.4']:
+        try:
+            nltk.data.find(f'corpora/{resource}')
+        except LookupError:
+            nltk.download(resource, download_dir=nltk_data_path)
+
     return WordNetLemmatizer()
 
 lemmatizer = setup_nltk()
