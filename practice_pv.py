@@ -55,7 +55,7 @@ def run_pv_trainer():
 
     # URL Raw de tu repositorio TeoriaFCE (¡Asegúrate de que sea la tuya!)
     # Reemplaza 'TU_USUARIO' por tu nombre real en GitHub
-    DATA_URL = "https://raw.githubusercontent.com/TU_USUARIO/TeoriaFCE/main/phrasal_verbs.csv"
+    DATA_URL = "https://raw.githubusercontent.com/henrypamo-dotcom/TeoriaFCE/refs/heads/main/phrasal_verbs.csv"
     
     try:
         df = pd.read_csv(DATA_URL)
